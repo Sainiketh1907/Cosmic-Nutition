@@ -1,0 +1,5 @@
+{
+  "name": "Gemini Nutrition Tracker",
+  "description": "An intelligent nutrition management system that extracts meal data from text, categorizes it, and provides insightful charts and analysis of caloric intake.",
+  "requestFramePermissions": []
+}
