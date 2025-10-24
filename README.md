@@ -1,6 +1,7 @@
 # cosmic-nutrition
 
 ![Cosmic Nutrition logo](./client/src/assets/cosmic_logo.png)
+![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)
 
 Cosmic Nutrition is a small MERN (MongoDB, Express, React, Node) application for tracking meals and daily nutrition. The project is split into two main pieces:
 
@@ -85,10 +86,6 @@ Feel free to open issues or PRs. For local contributions:
 
 ## License
 
-This project does not include a license file. Add a `LICENSE` if you want an open-source license.
+This project is licensed under the MIT License — see the `LICENSE` file in the repository root for full terms.
 
-----
-If you want, I can also:
 
-- Add a small `LICENSE` file (MIT by default).
-- Create a GitHub repo and push the current repo for you (need remote URL or `gh` authenticated here).
