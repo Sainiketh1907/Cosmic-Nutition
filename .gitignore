@@ -15,4 +15,3 @@ yarn-error.log*
 .vscode/
 /.pnp/
 .pnp.js
-client/src/auth_config.js
