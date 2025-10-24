@@ -49,7 +49,7 @@ function getHostFromMongoUri(uri) {
 }
 
 // Wait until the MongoDB host resolves to an IP or SRV record before attempting to connect.
-async function waitForMongoHost(uri, { timeoutMs = 60000, intervalMs = 2000 } = {}) {
+async function waitForMongoHost(uri, { timeoutMs = 180000, intervalMs = 2000 } = {}) {
   const host = getHostFromMongoUri(uri);
   if (!host) return;
 
@@ -65,7 +65,9 @@ async function waitForMongoHost(uri, { timeoutMs = 60000, intervalMs = 2000 } = 
           return; // SRV found
         }
       } catch (srvErr) {
-        // ignore SRV errors and fall back to A/AAAA lookup
+        // Log SRV errors (helps diagnose DNS issues during deploy)
+        console.warn(`SRV lookup failed for ${host}:`, srvErr && srvErr.message ? srvErr.message : srvErr);
+        // fall back to A/AAAA lookup
       }
 
       // Fallback to A/AAAA lookup
@@ -75,13 +77,14 @@ async function waitForMongoHost(uri, { timeoutMs = 60000, intervalMs = 2000 } = 
         return;
       }
     } catch (err) {
-      // continue retrying
+      // Log lookup errors and continue retrying
+      console.warn(`DNS lookup attempt failed for ${host}:`, err && err.message ? err.message : err);
     }
 
     console.log(`Waiting for MongoDB host (${host}) to resolve... retrying in ${intervalMs}ms`);
     await new Promise(r => setTimeout(r, intervalMs));
   }
-  throw new Error(`Timed out waiting for MongoDB host to resolve: ${host}`);
+  throw new Error(`Timed out waiting for MongoDB host to resolve: ${host} (waited ${timeoutMs}ms)`);
 }
 
 // Initialize server after ensuring DB host is resolvable
