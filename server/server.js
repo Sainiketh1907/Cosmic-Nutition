@@ -28,7 +28,7 @@ app.use('/api/users', userRoutes);
 
 // Simple route for checking server status
 app.get('/', (req, res) => {
-  res.send('Gemini Nutrition Tracker API is running!');
+  res.send('Cosmic Nutrition API is running!');
 });
 
 // Helper: extract host from a MongoDB URI (handles mongodb+srv:// and mongodb://)
@@ -49,7 +49,7 @@ function getHostFromMongoUri(uri) {
 }
 
 // Wait until the MongoDB host resolves to an IP or SRV record before attempting to connect.
-async function waitForMongoHost(uri, { timeoutMs = 180000, intervalMs = 2000 } = {}) {
+async function waitForMongoHost(uri, { timeoutMs = 60000, intervalMs = 2000 } = {}) {
   const host = getHostFromMongoUri(uri);
   if (!host) return;
 
